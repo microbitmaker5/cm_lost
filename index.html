@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#ff7a90">
+    <title>청미르초등학교 분실물 센터</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquareRound@1.0/nanumsquareround.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        :root{ --ink:#3a2d4d; --muted:#8a7ba0; }
+        *{box-sizing:border-box}
+        body {
+            font-family:"NanumSquareRound","Gowun Dodum","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+            background-color:#fff8e7;
+            background-image:radial-gradient(#ffe2a8 2.2px,transparent 2.4px),radial-gradient(#ffd0dc 2px,transparent 2.2px);
+            background-size:34px 34px,34px 34px;background-position:0 0,17px 17px;
+            margin:0; padding:20px; color:var(--ink); letter-spacing:-.2px;
+        }
+        .container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 26px; position:relative; z-index:1; }
+        body::before,body::after{position:fixed;z-index:0;pointer-events:none;font-size:34px;opacity:.5}
+        body::before{content:"☁️";right:5%;top:18px;animation:floaty 6s ease-in-out infinite}
+        body::after{content:"⭐";left:3%;bottom:16px;animation:floaty 5s ease-in-out infinite reverse}
+        @keyframes floaty{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(6deg)}}
+        @keyframes popin{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+
+        h1 { text-align: center; margin: 6px 0 0; font-size:30px; font-weight:800; color:#ff5c7a; text-shadow:2px 2px 0 #ffe0e6; }
+        .sub { text-align:center; margin:0 0 4px; color:var(--muted); font-size:14px; font-weight:700; }
+
+        .form-section { background: #fff; padding: 22px; border-radius: 26px; border:3px solid #ffd0dc; box-shadow: 0 7px 0 #ffd0dc; animation:popin .5s both; }
+        .form-section h2 { margin-top: 0; color:#e0566f; font-size: 20px; border-bottom:none; padding-bottom:0; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 18px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 13px; font-weight: 800; color: #b98a3a; }
+        .form-group input { padding: 12px 14px; border: 3px solid #ffe6bf; border-radius: 16px; font-size: 15px; background:#fffdf5; font-family:inherit; color:var(--ink); transition:border-color .15s; }
+        .form-group input:focus { outline:none; border-color:#ff7a90; }
+        .form-group input[type="file"] { border: none; padding: 6px 0; background:transparent; font-size:13px; }
+        .btn-submit { width: 100%; padding: 15px; background:linear-gradient(135deg,#ff7a90,#ffa45c); color: white; border:none; border-radius: 999px; font-size: 17px; font-weight: 800; font-family:inherit; cursor: pointer; box-shadow:0 5px 0 #e0566f; transition:transform .12s, box-shadow .12s; }
+        .btn-submit:active { transform:translateY(3px); box-shadow:0 2px 0 #e0566f; }
+        .btn-submit:disabled { background:#e3e6ee; color:#aab0c0; cursor: not-allowed; box-shadow:none; }
+
+        .list-section h2 { color:#4dabf7; font-size: 20px; margin: 0 0 14px; display:flex; align-items:center; gap:8px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+        .card {
+            --c:#ff7a90;
+            background: #fff; border-radius: 22px; overflow: hidden;
+            border:3px solid var(--c); box-shadow: 0 6px 0 var(--c);
+            transition: transform 0.15s; animation:popin .45s both;
+        }
+        .card:nth-child(6n+1){--c:#ff7a90}.card:nth-child(6n+2){--c:#4dabf7}.card:nth-child(6n+3){--c:#3ddbb0}
+        .card:nth-child(6n+4){--c:#ffa94d}.card:nth-child(6n+5){--c:#9775fa}.card:nth-child(6n+6){--c:#f783ac}
+        .card:hover { transform: translateY(-5px) rotate(-1deg); }
+        .card-img { width: 100%; height: 170px; object-fit: cover; background-color: #fdf1d8; display:block; }
+        .card-body { padding: 14px 16px 16px; }
+        .card-title { font-size: 17px; font-weight: 800; color: var(--ink); margin: 0 0 10px 0; }
+        .card-info { font-size: 13.5px; color: #7a7390; margin: 5px 0; display: flex; align-items:center; gap:6px; }
+        .info-label { min-width: 56px; color:color-mix(in srgb, var(--c) 70%, #000); font-weight: 800; }
+
+        .empty-note, .error-note { grid-column: 1/-1; text-align: center; font-weight:700; padding:20px; border-radius:18px; }
+        .empty-note { color:#b98a3a; background:#fff6cf; border:2px dashed #ffc93c; }
+        .error-note { color:#e0566f; background:#ffe6ea; border:2px dashed #ff9fae; }
+
+        @media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
+        @media(max-width:600px){ h1{font-size:24px} .form-section{padding:16px} }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🧢 청미르초등학교 분실물 센터</h1>
+    <p class="sub">주운 물건을 등록하고, 잃어버린 물건을 찾아보세요</p>
+
+    <!-- 1. 분실물 등록 폼 구역 -->
+    <div class="form-section">
+        <h2>➕ 새 분실물 등록하기 (사진 첨부 가능)</h2>
+        <form id="lostForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="date">📅 분실날짜</label>
+                    <input type="text" id="date" placeholder="예: 26.10.03" required>
+                </div>
+                <div class="form-group">
+                    <label for="place">📍 분실장소</label>
+                    <input type="text" id="place" placeholder="예: 운동장, 2학년복도" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">🎒 분실물명</label>
+                    <input type="text" id="name" placeholder="예: 아이패드 펜슬, 지갑" required>
+                </div>
+                <div class="form-group">
+                    <label for="imageFile">📷 분실물사진 등록</label>
+                    <input type="file" id="imageFile" accept="image/*">
+                </div>
+            </div>
+            <button type="submit" class="btn-submit">사진 업로드 및 시트 저장</button>
+        </form>
+    </div>
+
+    <!-- 2. 분실물 출력 구역 -->
+    <div class="list-section">
+        <h2>🔎 최근 등록된 분실물 (최신 10개)</h2>
+        <div id="lost-grid" class="grid">
+            <p class="empty-note" style="grid-column: 1/-1;">데이터를 동기화하는 중...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 질문자님의 배포된 앱스 스크립트 URL을 넣으세요
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbyeE1A4hnZrxCGFghEZ4KdhIUBq15Zl3NX7GWSOkZiMkypxbcKgPiPFHGwY1wwsjgBl/exec";
+
+    // 데이터 조회 (GET)
+    function loadLostItems() {
+        fetch(webAppUrl)
+            .then(response => response.json())
+            .then(data => {
+                const grid = document.getElementById("lost-grid");
+                grid.innerHTML = "";
+
+                if (data.length === 0) {
+                    grid.innerHTML = "<p class='empty-note'>등록된 분실물이 없습니다.</p>";
+                    return;
+                }
+
+                data.forEach(item => {
+                    const card = document.createElement("div");
+                    card.className = "card";
+                    card.innerHTML = `
+                        <img class="card-img" src="${item.image}" alt="${item.name}" onerror="this.src='https://placeholder.com'">
+                        <div class="card-body">
+                            <h3 class="card-title">🎁 ${item.name}</h3>
+                            <div class="card-info"><span class="info-label">📅 분실일</span> <span>${item.date}</span></div>
+                            <div class="card-info"><span class="info-label">📍 장소</span> <span>${item.place}</span></div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById("lost-grid").innerHTML = "<p class='error-note'>데이터 로딩 실패</p>";
+            });
+    }
+
+    // 데이터 등록 (POST)
+    document.getElementById("lostForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.querySelector(".btn-submit");
+        submitBtn.innerText = "사진 및 데이터 업로드 중 (잠시만 기다려주세요)...";
+        submitBtn.disabled = true;
+
+        const fileInput = document.getElementById("imageFile");
+        const file = fileInput.files[0];
+
+        const payload = {
+            date: document.getElementById("date").value,
+            place: document.getElementById("place").value,
+            name: document.getElementById("name").value,
+            fileData: null,
+            fileName: null
+        };
+
+        // 파일을 선택한 경우 Base64 변환 후 전송
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                payload.fileData = reader.result;
+                payload.fileName = file.name;
+                sendData(payload, submitBtn);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            sendData(payload, submitBtn);
+        }
+    });
+
+    function sendData(payload, submitBtn) {
+        fetch(webAppUrl, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(response => {
+            if (response.status === "success") {
+                alert("구글 드라이브 사진 저장 및 시트 등록 완료!");
+                document.getElementById("lostForm").reset();
+                loadLostItems();
+            } else {
+                alert("등록 실패: " + response.message);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("서버 통신 오류가 발생했습니다.");
+        })
+        .finally(() => {
+            submitBtn.innerText = "사진 업로드 및 시트 저장";
+            submitBtn.disabled = false;
+        });
+    }
+
+    window.onload = loadLostItems;
+</script>
+</body>
+</html>
