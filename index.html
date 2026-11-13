@@ -220,6 +220,7 @@
 </div>
 
 <script>
+    // 질문자님의 고유 웹 앱 주소가 이미 들어가 있습니다!
     const webAppUrl = "https://script.google.com/macros/s/AKfycbyeE1A4hnZrxCGFghEZ4KdhIUBq15Zl3NX7GWSOkZiMkypxbcKgPiPFHGwY1wwsjgBl/exec";
 
     const imageInput = document.getElementById("imageFile");
@@ -233,15 +234,6 @@
             fileLabel.classList.remove("has-file");
         }
     });
-
-    // 드라이브 파일 ID를 안정적인 이미지 링크로 변환
-    function getImageSrc(imgVal) {
-        if (!imgVal) return 'https://via.placeholder.com/300x200?text=No+Image';
-        if (imgVal.startsWith('http')) {
-            return imgVal;
-        }
-        return `https://drive.google.com/uc?export=view&id=${imgVal}`;
-    }
 
     function loadLostItems() {
         fetch(webAppUrl)
@@ -267,7 +259,7 @@
                     const seq = item.seq || (items.length - idx);
                     const isCompleted = (item.completed === true || item.completed === "수령완료");
                     const reserveText = item.reserve || "";
-                    const imgUrl = getImageSrc(item.image);
+                    const imgUrl = item.image || 'https://via.placeholder.com/300x200?text=No+Image';
 
                     const card = document.createElement("div");
                     card.className = "card" + (isCompleted ? " is-completed" : "");
@@ -325,7 +317,7 @@
         const item = window.__lostItems && window.__lostItems[idx];
         if (!item) return;
         const seq = item.seq || "";
-        const imgUrl = getImageSrc(item.image);
+        const imgUrl = item.image || 'https://via.placeholder.com/600x400?text=No+Image';
         const modal = document.getElementById("zoomModal");
         const content = document.getElementById("zoomCardContent");
         content.innerHTML = `
