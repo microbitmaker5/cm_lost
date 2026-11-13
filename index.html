@@ -30,7 +30,6 @@
         h1 { text-align: center; margin: 6px 0 0; font-size:30px; font-weight:800; color:#ff5c7a; text-shadow:2px 2px 0 #ffe0e6; }
         .sub { text-align:center; margin:0 0 4px; color:var(--muted); font-size:14px; font-weight:700; }
 
-        /* 1. 등록 폼 영역 */
         .form-section { background: #fff; padding: 22px; border-radius: 26px; border:3px solid #ffd0dc; box-shadow: 0 7px 0 #ffd0dc; animation:popin .5s both; }
         .form-section h2 { margin-top: 0; color:#e0566f; font-size: 20px; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 18px; }
@@ -39,7 +38,6 @@
         .form-group input[type="text"] { padding: 12px 14px; border: 3px solid #ffe6bf; border-radius: 16px; font-size: 15px; background:#fffdf5; font-family:inherit; color:var(--ink); transition:border-color .15s; }
         .form-group input[type="text"]:focus { outline:none; border-color:#ff7a90; }
 
-        /* [요청 3] 파일 선택 버튼 커스텀 */
         .file-upload-wrapper { position: relative; display: flex; align-items: center; }
         .form-group input[type="file"] { display: none; }
         .custom-file-btn {
@@ -55,7 +53,6 @@
         .btn-submit:active { transform:translateY(3px); box-shadow:0 2px 0 #e0566f; }
         .btn-submit:disabled { background:#e3e6ee; color:#aab0c0; cursor: not-allowed; box-shadow:none; }
 
-        /* [요청 5] 수령완료 비율 대시보드 */
         .stats-section {
             background: #fff; padding: 18px 22px; border-radius: 24px;
             border: 3px solid #bde0fe; box-shadow: 0 6px 0 #bde0fe;
@@ -72,7 +69,6 @@
             color: #fff; font-size: 12px; font-weight: 800;
         }
 
-        /* 2. 분실물 목록 영역 */
         .list-section h2 { color:#4dabf7; font-size: 20px; margin: 0 0 14px; display:flex; align-items:center; gap:8px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
         .card {
@@ -87,12 +83,10 @@
         .card:nth-child(6n+4){--c:#ffa94d}.card:nth-child(6n+5){--c:#9775fa}.card:nth-child(6n+6){--c:#f783ac}
         .card:hover { transform: translateY(-5px) rotate(-0.5deg); }
         
-        /* [요청 1] 이미지/카드 클릭 가능 표시 */
         .card-clickable { cursor: zoom-in; }
         .card-img { width: 100%; height: 170px; object-fit: cover; background-color: #fdf1d8; display:block; }
         .card-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
         
-        /* [요청 4] 순번 뱃지 & 분실물명 */
         .card-title { font-size: 16.5px; font-weight: 800; color: var(--ink); margin: 0 0 10px 0; display: flex; align-items: center; gap: 6px; line-height: 1.3; }
         .seq-badge {
             background: var(--c); color: #fff; font-size: 12px; font-weight: 800;
@@ -101,7 +95,6 @@
         .card-info { font-size: 13.5px; color: #7a7390; margin: 4px 0; display: flex; align-items:center; gap:6px; }
         .info-label { min-width: 56px; color:color-mix(in srgb, var(--c) 70%, #000); font-weight: 800; }
 
-        /* [요청 2] 예약 메모 및 액션 버튼 */
         .reserve-note {
             margin: 8px 0 4px; padding: 7px 10px; border-radius: 12px;
             background: #fff3bf; border: 1.5px dashed #fcc419;
@@ -120,7 +113,6 @@
         .btn-complete { background: #e6fcf5; color: #0ca678; border: 2px solid #63e6be; }
         .btn-complete:hover { background: #c3fae8; }
 
-        /* [요청 2] 수령완료 오버레이 처리 */
         .card.is-completed { border-color: #adb5bd; box-shadow: 0 6px 0 #adb5bd; }
         .card.is-completed:hover { transform: none; }
         .completed-overlay {
@@ -141,7 +133,6 @@
             background: rgba(0,0,0,0.35); padding: 3px 10px; border-radius: 999px;
         }
 
-        /* [요청 1] 3배 크기 확대 팝업 모달 */
         .zoom-modal {
             display: none; position: fixed; inset: 0; z-index: 999;
             background: rgba(40, 30, 55, 0.72); backdrop-filter: blur(4px);
@@ -178,7 +169,6 @@
     <h1>🧢 청미르초등학교 분실물 센터</h1>
     <p class="sub">주운 물건을 등록하고, 잃어버린 물건을 찾아보세요</p>
 
-    <!-- 1. 분실물 등록 폼 구역 -->
     <div class="form-section">
         <h2>➕ 새 분실물 등록하기 (사진 첨부 가능)</h2>
         <form id="lostForm">
@@ -207,7 +197,6 @@
         </form>
     </div>
 
-    <!-- [요청 5] 수령완료 비율 시각화 구역 -->
     <div class="stats-section">
         <div class="stats-header">
             <div class="stats-title">📊 분실물 주인 찾아주기 현황</div>
@@ -218,7 +207,6 @@
         </div>
     </div>
 
-    <!-- 2. 분실물 출력 구역 -->
     <div class="list-section">
         <h2>🔎 최근 등록된 분실물 (클릭하면 크게 보여요!)</h2>
         <div id="lost-grid" class="grid">
@@ -227,16 +215,13 @@
     </div>
 </div>
 
-<!-- [요청 1] 3배 확대 팝업 모달 -->
 <div id="zoomModal" class="zoom-modal" onclick="closeZoomModal()">
     <div class="zoom-card" id="zoomCardContent"></div>
 </div>
 
 <script>
-    // 기존 배포된 앱스 스크립트 URL 그대로 유지
     const webAppUrl = "https://script.google.com/macros/s/AKfycbyeE1A4hnZrxCGFghEZ4KdhIUBq15Zl3NX7GWSOkZiMkypxbcKgPiPFHGwY1wwsjgBl/exec";
 
-    // [요청 3] 파일 선택 시 버튼 텍스트 및 스타일 변경
     const imageInput = document.getElementById("imageFile");
     const fileLabel = document.getElementById("fileLabel");
     imageInput.addEventListener("change", function() {
@@ -249,12 +234,19 @@
         }
     });
 
-    // 데이터 조회 (GET)
+    // 드라이브 파일 ID를 안정적인 이미지 링크로 변환
+    function getImageSrc(imgVal) {
+        if (!imgVal) return 'https://via.placeholder.com/300x200?text=No+Image';
+        if (imgVal.startsWith('http')) {
+            return imgVal;
+        }
+        return `https://drive.google.com/uc?export=view&id=${imgVal}`;
+    }
+
     function loadLostItems() {
         fetch(webAppUrl)
             .then(response => response.json())
             .then(res => {
-                // 기존 배열 형태 응답과 통계 포함 객체 응답 모두 호환되도록 처리
                 const items = Array.isArray(res) ? res : (res.items || []);
                 const totalCount = res.totalCount !== undefined ? res.totalCount : items.length;
                 const completedCount = res.completedCount !== undefined 
@@ -275,6 +267,7 @@
                     const seq = item.seq || (items.length - idx);
                     const isCompleted = (item.completed === true || item.completed === "수령완료");
                     const reserveText = item.reserve || "";
+                    const imgUrl = getImageSrc(item.image);
 
                     const card = document.createElement("div");
                     card.className = "card" + (isCompleted ? " is-completed" : "");
@@ -287,7 +280,7 @@
                             </div>
                         ` : ""}
                         <div class="card-clickable" onclick="openZoomModal(${idx})">
-                            <img class="card-img" src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                            <img class="card-img" src="${imgUrl}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
                             <div class="card-body" style="padding-bottom: 6px;">
                                 <h3 class="card-title">
                                     <span class="seq-badge">No.${seq}</span>
@@ -312,7 +305,6 @@
                     grid.appendChild(card);
                 });
 
-                // 모달에서 참조할 수 있도록 전역 보관
                 window.__lostItems = items;
             })
             .catch(err => {
@@ -321,7 +313,6 @@
             });
     }
 
-    // [요청 5] 비율 게이지 업데이트
     function updateStatsBar(total, completed) {
         const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
         document.getElementById("statsText").textContent = `전체 ${total}건 중 ${completed}건 수령완료 (${percent}%)`;
@@ -330,15 +321,15 @@
         fill.textContent = percent >= 10 ? percent + "%" : "";
     }
 
-    // [요청 1] 3배 크기 팝업 열기 / 닫기
     function openZoomModal(idx) {
         const item = window.__lostItems && window.__lostItems[idx];
         if (!item) return;
         const seq = item.seq || "";
+        const imgUrl = getImageSrc(item.image);
         const modal = document.getElementById("zoomModal");
         const content = document.getElementById("zoomCardContent");
         content.innerHTML = `
-            <img class="zoom-img" src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/600x400?text=No+Image'">
+            <img class="zoom-img" src="${imgUrl}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/600x400?text=No+Image'">
             <div class="zoom-body">
                 <h3 class="zoom-title">
                     ${seq ? `<span class="seq-badge" style="font-size:16px;padding:4px 12px;">No.${seq}</span>` : ""}
@@ -357,10 +348,9 @@
         document.getElementById("zoomModal").classList.remove("active");
     }
 
-    // [요청 2-1] 예약하기 (최대 20자)
     function handleReserve(seq, currentText) {
         const input = prompt("예약자 정보나 메모를 입력하세요 (최대 20자):", currentText || "");
-        if (input === null) return; // 취소 클릭 시
+        if (input === null) return;
 
         const trimmed = input.trim();
         if (trimmed.length > 20) {
@@ -375,7 +365,6 @@
         }, "예약 내용이 구글 시트에 저장되었습니다.");
     }
 
-    // [요청 2-2] 수령완료 처리
     function handleComplete(seq) {
         if (!confirm(`No.${seq} 분실물을 '수령완료' 처리할까요?`)) return;
 
@@ -405,7 +394,6 @@
         });
     }
 
-    // 신규 데이터 등록 (POST)
     document.getElementById("lostForm").addEventListener("submit", function(e) {
         e.preventDefault();
         
